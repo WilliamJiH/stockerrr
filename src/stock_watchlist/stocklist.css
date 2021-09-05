@@ -1,0 +1,18 @@
+.container {
+  padding: 1rem 1rem;
+}
+
+.head-wrapper {
+  text-align: left;
+}
+
+strong {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 16px;
+}
+
+.head-wrapper div {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 1px;
+  font-size: 12px;
+}

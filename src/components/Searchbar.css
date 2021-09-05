@@ -1,0 +1,37 @@
+.form {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 0.5rem 0;
+  overflow: hidden;
+}
+
+.form input {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border: 1px solid #4d4dff;
+  padding: 0.3rem;
+  border-radius: 0.5rem;
+  float: left;
+  width: 70%;
+}
+
+.form input:focus {
+  outline-width: 0;
+}
+
+.form button {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background: #4d4dff;
+  color: white;
+  padding: 0.3rem 1.3rem;
+  border: 0px solid transparent;
+  border-radius: 0.5rem;
+  float: right;
+}
+
+.form button:active {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background: #2c2cff;
+  color: white;
+  padding: 0.3rem 1.3rem;
+  border: 0px solid transparent;
+  border-radius: 0.5rem;
+}
