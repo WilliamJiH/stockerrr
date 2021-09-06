@@ -43,11 +43,16 @@ const StockList = () => {
 
   useEffect(() => {
     // const interval = setInterval(() => {
-    //   const getStockName = stocks;
-    //   console.log(getStockName);
+    //   stocks.map((everyStock) => {
+    //     getStockPrice(everyStock.id);
+    //   });
     // }, MINUTE_MS);
     // return () => clearInterval(interval);
   }, [stocks]);
+
+  const removeStockHandler = (stockName) => {
+    setStocks((stocks) => stocks.filter((stock) => stock.id !== stockName));
+  };
 
   return (
     <>
@@ -72,6 +77,7 @@ const StockList = () => {
                 currentPrice={currentPrice}
                 dif={difPrice}
                 difInPercent={difInPercentPrice}
+                removeStock={() => removeStockHandler(stockName)}
               />
             </div>
           );

@@ -3,7 +3,7 @@ import { faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 import './Stock.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Stock = ({ stockName, currentPrice, dif, difInPercent }) => {
+const Stock = ({ stockName, currentPrice, dif, difInPercent, removeStock }) => {
   var difference = dif;
   var differencePercent = (difInPercent * 100).toFixed(2) + '%';
   if (dif > 0) {
@@ -13,17 +13,27 @@ const Stock = ({ stockName, currentPrice, dif, difInPercent }) => {
 
   const [show, setShow] = useState(false);
 
-  const showRemoveBtn = () => {
-    setShow(!show);
+  const onBtnHandler = () => {
+    setShow(true);
+  };
+
+  const offBtnHandler = () => {
+    setTimeout(() => {
+      if (show) {
+        setShow(false);
+      }
+    }, 1000);
   };
 
   return (
     <div className='stock-big-container'>
       <div
         className='stock-container'
-        onMouseOver={showRemoveBtn}
+        onMouseEnter={onBtnHandler}
+        onMouseOut={offBtnHandler}
         style={{
-          transform: show ? 'translate(-5%, -0%)' : 'translate(+0%, -0%)',
+          transform: show ? 'translate(-1%, -0%)' : 'translate(+0%, -0%)',
+          transitionDuration: '500ms',
         }}
       >
         <div className='stock-left-container'>{stockName}</div>
@@ -39,7 +49,7 @@ const Stock = ({ stockName, currentPrice, dif, difInPercent }) => {
       </div>
       <div>
         {show && (
-          <button className='remove-btn'>
+          <button className='remove-btn' onClick={removeStock}>
             <FontAwesomeIcon icon={faMinusCircle} />
           </button>
         )}
