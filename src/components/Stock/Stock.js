@@ -23,7 +23,7 @@ const Stock = ({ stockName, currentPrice, dif, difInPercent }) => {
         className='stock-container'
         onMouseOver={showRemoveBtn}
         style={{
-          transform: show ? 'translate(-10%, -0%)' : 'translate(+0%, -0%)',
+          transform: show ? 'translate(-5%, -0%)' : 'translate(+0%, -0%)',
         }}
       >
         <div className='stock-left-container'>{stockName}</div>
