@@ -39,20 +39,20 @@ const StockList = () => {
       });
   };
 
+  const removeStockHandler = (id) => {
+    setStocks((stocks) => stocks.filter((stock) => stock.id !== id));
+  };
+
   const MINUTE_MS = 60000;
 
-  useEffect(() => {
-    // const interval = setInterval(() => {
-    //   stocks.map((everyStock) => {
-    //     getStockPrice(everyStock.id);
-    //   });
-    // }, MINUTE_MS);
-    // return () => clearInterval(interval);
-  }, [stocks]);
-
-  const removeStockHandler = (stockName) => {
-    setStocks((stocks) => stocks.filter((stock) => stock.id !== stockName));
-  };
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     stocks.map((everyStock) => {
+  //       getStockPrice(everyStock.id);
+  //     });
+  //   }, MINUTE_MS);
+  //   return () => clearInterval(interval);
+  // }, [stocks]);
 
   return (
     <>
@@ -77,7 +77,7 @@ const StockList = () => {
                 currentPrice={currentPrice}
                 dif={difPrice}
                 difInPercent={difInPercentPrice}
-                removeStock={() => removeStockHandler(stockName)}
+                removeStock={() => removeStockHandler(id)}
               />
             </div>
           );
