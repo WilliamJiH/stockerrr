@@ -1,2 +1,2 @@
-#stockerrr 
+# stockerrr 
 stocker is a stock watchlist program for the US stock market. This program is currently under development...
