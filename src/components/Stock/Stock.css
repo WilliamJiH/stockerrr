@@ -1,0 +1,45 @@
+.stock-big-container {
+  width: 100%;
+}
+
+.stock-container {
+  width: 100%;
+  border-radius: 0.5rem;
+  box-shadow: 0.3em 0.3em 1em rgba(0, 0, 0, 0.1);
+  padding: 0.6rem 0;
+  margin: 1rem 0;
+  overflow: hidden;
+}
+
+.stock-left-container {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  padding-left: 0.8rem;
+  float: left;
+}
+
+.remove-btn {
+  color: red;
+  border: 0px solid transparent;
+  background: white;
+  font-size: 1rem;
+}
+
+.stock-right-container {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  float: right;
+  text-align: right;
+  padding-right: 0.8rem;
+}
+
+.currentPrice {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.priceChange {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 10px;
+}

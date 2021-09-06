@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import Searchbar from '../components/Searchbar';
-import Stock from '../components/Stock';
+import Searchbar from '../components/Searchbar/Searchbar';
+import Stock from '../components/Stock/Stock';
 import './stocklist.css';
 
 const StockList = () => {
@@ -24,25 +24,30 @@ const StockList = () => {
           stockName +
           '&token=c4qdj42ad3icc97rgt80'
       )
-      .then((response) => {
-        console.log(response);
+      .then((resp) => {
+        console.log(resp);
+        const response = resp.data;
         const newStockData = {
           id: stockName,
-          currentPrice: response.data.c,
-          difPrice: response.data.d,
-          difInPercentPrice: response.data.dp,
+          currentPrice: response.c,
+          difPrice: response.d,
+          difInPercentPrice: response.dp,
         };
-        setStocks([...stocks, newStockData]);
-        console.log(stocks);
+        if (response.c && response.d && response.dp) {
+          setStocks([...stocks, newStockData]);
+        }
       });
   };
 
+  const MINUTE_MS = 60000;
+
   useEffect(() => {
-    if (stockName) {
-      getStockPrice(stockName);
-      console.log(stocks);
-    }
-  }, []);
+    // const interval = setInterval(() => {
+    //   const getStockName = stocks;
+    //   console.log(getStockName);
+    // }, MINUTE_MS);
+    // return () => clearInterval(interval);
+  }, [stocks]);
 
   return (
     <>
@@ -59,24 +64,18 @@ const StockList = () => {
           onChange={(e) => setStockName(e.target.value)}
         />
         {stocks.map((newStock, index) => {
-          const { id, stockName, stockPrice, dif, difInPercent } = newStock;
+          const { id, currentPrice, difPrice, difInPercentPrice } = newStock;
           return (
             <div key={id}>
               <Stock
-                stockName={stockName}
-                stockPrice={stockPrice}
-                dif={dif}
-                difInPercent={difInPercent}
+                stockName={id}
+                currentPrice={currentPrice}
+                dif={difPrice}
+                difInPercent={difInPercentPrice}
               />
             </div>
           );
         })}
-        <Stock
-          stockName={'AAPL'}
-          currentPrice={154.3}
-          dif={0.65}
-          difInPercent={0.423}
-        />
       </div>
     </>
   );
