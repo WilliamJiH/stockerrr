@@ -1,16 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 import './Stock.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useEffect } from 'react/cjs/react.development';
 
-const Stock = ({
-  stockName,
-  currentPrice,
-  dif,
-  difInPercent,
-  removeStock,
-  isMounted,
-}) => {
+const Stock = ({ stockName, currentPrice, dif, difInPercent, removeStock }) => {
   var difference = dif;
   var differencePercent = (difInPercent * 100).toFixed(2) + '%';
   if (dif > 0) {
@@ -19,22 +13,26 @@ const Stock = ({
   }
 
   const [show, setShow] = useState(false);
+  const isMounted = useRef(false);
 
   const onBtnHandler = () => {
-    setShow(true);
-    console.log(isMounted);
-  };
-
-  const offBtnHandler = ({ isMounted }) => {
-    console.log(isMounted);
-    if (isMounted) {
-      setTimeout(() => {
-        if (show) {
-          setShow(false);
-        }
-      }, 1000);
+    if (isMounted.current) {
+      setShow(true);
     }
   };
+
+  const offBtnHandler = () => {
+    setTimeout(() => {
+      if (show && isMounted.current) {
+        setShow(false);
+      }
+    }, 2000);
+  };
+
+  useEffect(() => {
+    isMounted.current = true;
+    return () => (isMounted.current = false);
+  });
 
   return (
     <div className='stock-big-container'>
