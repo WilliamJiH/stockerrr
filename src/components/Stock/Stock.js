@@ -22,9 +22,11 @@ const Stock = ({
 
   const onBtnHandler = () => {
     setShow(true);
+    console.log(isMounted);
   };
 
   const offBtnHandler = ({ isMounted }) => {
+    console.log(isMounted);
     if (isMounted) {
       setTimeout(() => {
         if (show) {

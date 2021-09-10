@@ -58,23 +58,23 @@ const StockList = () => {
   };
 
   const removeStockHandler = (id) => {
+    setIsMounted(false);
     setStocks((stocks) => stocks.filter((stock) => stock.id !== id));
     setStockNames(stockNames.filter((stockName) => stockName !== id));
-    setIsMounted(false);
     setIsMounted(true);
   };
 
-  const MINUTE_MS = 60000;
+  // const MINUTE_MS = 60000;
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      stockNames.map((stockName) => getStockPrice(stockName));
-      setTime(currentTime);
-    }, MINUTE_MS);
-    return () => {
-      clearInterval(interval);
-    };
-  });
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     stockNames.map((stockName) => getStockPrice(stockName));
+  //     setTime(currentTime);
+  //   }, MINUTE_MS);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // });
 
   const closeModal = () => {
     dispatch({ type: 'CLOSE_MODAL' });
