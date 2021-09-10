@@ -57,26 +57,6 @@ const StockList = () => {
       });
   };
 
-  const getStockPriceUpdate = async (stockName) => {
-    await axios
-      .get(
-        'https://finnhub.io/api/v1/quote?symbol=' +
-          stockName +
-          '&token=c4qdj42ad3icc97rgt80'
-      )
-      .then((resp) => {
-        const response = resp.data;
-        const newStockData = {
-          id: stockName,
-          currentPrice: response.c,
-          difPrice: response.d,
-          difInPercentPrice: response.dp,
-        };
-        console.log(newStockData);
-        return newStockData;
-      });
-  };
-
   const removeStockHandler = (id) => {
     setStocks((stocks) => stocks.filter((stock) => stock.id !== id));
     setStockNames(stockNames.filter((stockName) => stockName !== id));
@@ -88,13 +68,12 @@ const StockList = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const data = stockNames.map((stockName) =>
-        getStockPriceUpdate(stockName)
-      );
-      setStocks(data);
+      stockNames.map((stockName) => getStockPrice(stockName));
       setTime(currentTime);
     }, MINUTE_MS);
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+    };
   });
 
   const closeModal = () => {
