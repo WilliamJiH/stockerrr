@@ -3,7 +3,14 @@ import { faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 import './Stock.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Stock = ({ stockName, currentPrice, dif, difInPercent, removeStock }) => {
+const Stock = ({
+  stockName,
+  currentPrice,
+  dif,
+  difInPercent,
+  removeStock,
+  isMounted,
+}) => {
   var difference = dif;
   var differencePercent = (difInPercent * 100).toFixed(2) + '%';
   if (dif > 0) {
@@ -17,12 +24,14 @@ const Stock = ({ stockName, currentPrice, dif, difInPercent, removeStock }) => {
     setShow(true);
   };
 
-  const offBtnHandler = () => {
-    setTimeout(() => {
-      if (show) {
-        setShow(false);
-      }
-    }, 1000);
+  const offBtnHandler = ({ isMounted }) => {
+    if (isMounted) {
+      setTimeout(() => {
+        if (show) {
+          setShow(false);
+        }
+      }, 1000);
+    }
   };
 
   return (
