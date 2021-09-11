@@ -21,10 +21,12 @@ const StockList = () => {
   var currentTime = date.getHours() + ':' + date.getMinutes();
   const [time, setTime] = useState(currentTime);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (stockName && !stockNames.includes(stockName)) {
-      getStockPrice(stockName);
+      const data = await getStockPrice(stockName);
+      setStocks([...stocks, data]);
+      setStockNames([...stockNames, stockName]);
       setStockName('');
     } else if (stockName && stockNames.includes(stockName)) {
       dispatch({ type: 'SYMBOL_EXISTS' });
@@ -35,7 +37,7 @@ const StockList = () => {
   };
 
   const getStockPrice = async (stockName) => {
-    await axios
+    const res = await axios
       .get(
         'https://finnhub.io/api/v1/quote?symbol=' +
           stockName +
@@ -50,10 +52,10 @@ const StockList = () => {
           difInPercentPrice: response.dp,
         };
         if (response.c && response.d && response.dp) {
-          setStocks([...stocks, newStockData]);
-          setStockNames([...stockNames, stockName]);
+          return newStockData;
         }
       });
+    return res;
   };
 
   const removeStockHandler = (id) => {
@@ -64,8 +66,11 @@ const StockList = () => {
   const MINUTE_MS = 60000;
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      stockNames.map((stockName) => getStockPrice(stockName));
+    const interval = setInterval(async () => {
+      const data = await Promise.all(
+        stockNames.map((stockName) => getStockPrice(stockName))
+      );
+      setStocks(data);
       setTime(currentTime);
     }, MINUTE_MS);
     return () => {
