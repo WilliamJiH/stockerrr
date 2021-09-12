@@ -6,10 +6,10 @@ import { useEffect } from 'react/cjs/react.development';
 
 const Stock = ({ stockName, currentPrice, dif, difInPercent, removeStock }) => {
   var difference = dif;
-  var differencePercent = (difInPercent * 100).toFixed(2) + '%';
+  var differencePercent = difInPercent.toFixed(2) + '%';
   if (dif > 0) {
     difference = '+' + dif;
-    differencePercent = '+' + (difInPercent * 100).toFixed(2) + '%';
+    differencePercent = '+' + difInPercent.toFixed(2) + '%';
   }
 
   const [show, setShow] = useState(false);
