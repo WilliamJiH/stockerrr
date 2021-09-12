@@ -25,9 +25,11 @@ const StockList = () => {
     e.preventDefault();
     if (stockName && !stockNames.includes(stockName)) {
       const data = await getStockPrice(stockName);
-      setStocks([...stocks, data]);
-      setStockNames([...stockNames, stockName]);
-      setStockName('');
+      if (data) {
+        setStocks([...stocks, data]);
+        setStockNames([...stockNames, stockName]);
+        setStockName('');
+      }
     } else if (stockName && stockNames.includes(stockName)) {
       dispatch({ type: 'SYMBOL_EXISTS' });
       setStockName('');
@@ -55,7 +57,10 @@ const StockList = () => {
           return newStockData;
         }
       });
-    return res;
+    if (typeof res !== 'undefined') {
+      console.log(res);
+      return res;
+    }
   };
 
   const removeStockHandler = (id) => {
